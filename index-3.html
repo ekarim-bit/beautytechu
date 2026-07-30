@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeautyTech U™ — Where Culture Meets the Algorithm</title>
+<meta name="description" content="A 12-module live virtual program at the intersection of beauty, business, AI, and technology. Presented by Ebony J. Karim. Winter Cohort launches January 12, 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #151C24;
+    --magenta: #D840C9;
+    --cream: #F5F1EB;
+    --slate: #4C5564;
+    --light: #FAF8F4;
+    --gold: #C9A84C;
+    --mid: #8A919E;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--cream); overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(21,28,36,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(216,64,201,0.2); }
+  .nav-logo { font-weight: 600; font-size: 15px; letter-spacing: 0.12em; color: var(--cream); text-decoration: none; }
+  .nav-logo span { color: var(--magenta); }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--cream); }
+  .nav-cta { background: var(--magenta) !important; color: white !important; padding: 10px 24px; border-radius: 2px; font-weight: 600 !important; }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 140px 48px 100px; position: relative; overflow: hidden; }
+  .hero-grain { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); opacity: 0.5; }
+  .hero-glow { position: absolute; top: 0; right: 0; width: 50vw; height: 100%; background: radial-gradient(ellipse at 80% 30%, rgba(216,64,201,0.1) 0%, transparent 65%); pointer-events: none; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; color: var(--magenta); text-transform: uppercase; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.7s 0.1s forwards; }
+  .hero-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--magenta); }
+  .hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(52px, 7vw, 96px); font-weight: 900; line-height: 1.0; letter-spacing: -0.02em; max-width: 900px; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.25s forwards; }
+  .hero-headline em { font-style: italic; color: var(--magenta); }
+  .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--mid); font-weight: 300; line-height: 1.75; max-width: 560px; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.55s forwards; }
+  .btn-primary { display: inline-block; background: var(--magenta); color: white; padding: 16px 36px; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 2px; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(216,64,201,0.35); }
+  .btn-secondary { display: inline-block; color: var(--cream); padding: 16px 36px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid rgba(245,241,235,0.2); border-radius: 2px; transition: border-color 0.2s; }
+  .btn-secondary:hover { border-color: var(--cream); }
+  .hero-stats { display: flex; gap: 48px; margin-top: 72px; flex-wrap: wrap; padding-top: 48px; border-top: 1px solid rgba(245,241,235,0.1); opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--magenta); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--mid); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; font-weight: 500; }
+
+  /* PRESS */
+  #press { background: var(--cream); padding: 28px 48px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .press-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate); opacity: 0.6; white-space: nowrap; }
+  .press-logos { display: flex; gap: 36px; align-items: center; }
+  .press-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--slate); opacity: 0.55; }
+
+  /* ABOUT */
+  #about { background: var(--light); padding: 120px 48px; }
+  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--magenta); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .section-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: var(--magenta); }
+  .section-headline { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 900; line-height: 1.1; color: var(--black); letter-spacing: -0.02em; margin-bottom: 24px; }
+  .section-headline em { font-style: italic; color: var(--magenta); }
+  .about-body { font-size: 16px; color: var(--slate); line-height: 1.85; font-weight: 300; margin-bottom: 18px; }
+  .about-body strong { color: var(--black); font-weight: 600; }
+  .tracks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .track-card { background: white; padding: 22px; border-radius: 3px; border-left: 3px solid var(--magenta); box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  .track-num { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; color: var(--magenta); text-transform: uppercase; margin-bottom: 8px; }
+  .track-name { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; margin-bottom: 6px; }
+  .track-desc { font-size: 12px; color: var(--slate); line-height: 1.6; font-weight: 300; }
+
+  /* SESSIONS */
+  #sessions { background: var(--black); padding: 120px 48px; }
+  .sessions-inner { max-width: 1100px; margin: 0 auto; }
+  .sessions-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 64px; flex-wrap: wrap; gap: 24px; }
+  .sessions-intro { font-size: 15px; color: var(--mid); max-width: 440px; line-height: 1.75; font-weight: 300; }
+  .sessions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .session-card { background: rgba(245,241,235,0.04); padding: 32px 36px; border: 1px solid rgba(245,241,235,0.06); transition: background 0.25s, border-color 0.25s; position: relative; overflow: hidden; }
+  .session-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--magenta); transition: width 0.3s; }
+  .session-card:hover { background: rgba(245,241,235,0.07); border-color: rgba(216,64,201,0.25); }
+  .session-card:hover::before { width: 100%; }
+  .session-type { display: inline-block; padding: 3px 10px; border-radius: 2px; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14px; }
+  .session-type.live { background: rgba(216,64,201,0.14); color: var(--magenta); }
+  .session-type.async { background: rgba(76,85,100,0.28); color: var(--mid); }
+  .session-num { font-size: 10px; font-weight: 700; color: rgba(216,64,201,0.45); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+  .session-title { font-size: 19px; font-weight: 600; color: var(--cream); line-height: 1.3; margin-bottom: 10px; }
+  .session-desc { font-size: 13px; color: var(--mid); line-height: 1.7; font-weight: 300; margin-bottom: 14px; }
+  .session-guest { font-size: 11px; color: var(--magenta); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+  .session-guest::before { content: '★'; font-size: 9px; }
+  .capstone-box { margin-top: 48px; padding: 40px; border: 1px solid rgba(216,64,201,0.22); background: rgba(216,64,201,0.04); }
+  .capstone-inner { display: flex; gap: 48px; flex-wrap: wrap; }
+  .capstone-left { flex: 1; min-width: 240px; }
+  .capstone-right { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 12px; }
+  .capstone-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--cream); margin-bottom: 12px; margin-top: 10px; }
+  .capstone-desc { font-size: 13px; color: var(--mid); line-height: 1.75; font-weight: 300; }
+  .track-pill { padding: 18px; background: rgba(245,241,235,0.04); }
+  .track-pill-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+  .track-pill-desc { font-size: 13px; color: var(--cream); line-height: 1.6; }
+
+  /* PRICING */
+  #pricing { background: var(--cream); padding: 120px 48px; }
+  .pricing-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+  .pricing-card { background: var(--black); border-radius: 6px; padding: 60px 64px; margin-top: 52px; position: relative; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.2); }
+  .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--magenta); }
+  .pricing-glow { position: absolute; bottom: -80px; right: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(216,64,201,0.1) 0%, transparent 70%); pointer-events: none; }
+  .pricing-badge { display: inline-block; padding: 4px 14px; background: rgba(216,64,201,0.12); color: var(--magenta); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; border-radius: 2px; margin-bottom: 20px; }
+  .pricing-amount { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: var(--cream); line-height: 1; margin-bottom: 6px; }
+  .pricing-period { font-size: 13px; color: var(--mid); margin-bottom: 40px; }
+  .pricing-includes { list-style: none; text-align: left; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 40px; }
+  .pricing-includes li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--cream); font-weight: 400; line-height: 1.5; }
+  .pricing-includes li::before { content: '✓'; color: var(--magenta); font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .seats-bar { background: rgba(245,241,235,0.08); border-radius: 2px; height: 3px; margin: 28px 0 10px; overflow: hidden; }
+  .seats-fill { height: 100%; background: var(--magenta); width: 0%; border-radius: 2px; animation: fillBar 1.5s 0.5s ease-out both; }
+  @keyframes fillBar { from { width: 0; } to { width: 0%; } }
+  .seats-text { font-size: 12px; color: var(--mid); text-align: left; }
+  .seats-text strong { color: var(--magenta); }
+  .pricing-note { font-size: 12px; color: var(--mid); margin-top: 18px; line-height: 1.65; }
+
+  /* ENROLL */
+  #enroll { background: var(--black); padding: 120px 48px; text-align: center; position: relative; overflow: hidden; }
+  .enroll-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, rgba(216,64,201,0.07) 0%, transparent 65%); }
+  .enroll-inner { max-width: 640px; margin: 0 auto; position: relative; }
+  .enroll-headline { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 60px); font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 22px; }
+  .enroll-headline em { font-style: italic; color: var(--magenta); }
+  .enroll-sub { font-size: 17px; color: var(--mid); font-weight: 300; line-height: 1.75; margin-bottom: 44px; }
+  .enroll-detail { font-size: 13px; color: var(--mid); margin-top: 20px; line-height: 1.75; }
+  .enroll-detail a { color: var(--magenta); text-decoration: none; }
+
+  /* FOOTER */
+  footer { background: rgba(0,0,0,0.35); border-top: 1px solid rgba(245,241,235,0.07); padding: 36px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .footer-logo { font-weight: 600; font-size: 13px; letter-spacing: 0.1em; color: var(--mid); }
+  .footer-logo span { color: var(--magenta); }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { font-size: 12px; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-copy { font-size: 11px; color: rgba(138,145,158,0.5); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s, transform 0.65s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    #hero { padding: 120px 20px 80px; }
+    .hero-stats { gap: 24px; margin-top: 48px; }
+    #about, #sessions, #pricing, #enroll { padding: 72px 20px; }
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .tracks-grid { grid-template-columns: 1fr; }
+    .sessions-grid { grid-template-columns: 1fr; }
+    .pricing-card { padding: 36px 24px; }
+    .pricing-includes { grid-template-columns: 1fr; }
+    #press { padding: 20px; gap: 16px; }
+    footer { flex-direction: column; text-align: center; padding: 28px 20px; }
+    .capstone-inner { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">BEAUTYTECH <span>U™</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#sessions">Curriculum</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://buy.stripe.com/4gM9AM9F71z58A45dUco001" class="nav-cta">Enroll Now →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Winter Cohort · Launches January 12, 2027</div>
+  <h1 class="hero-headline">Where <em>Culture</em><br>Meets the Algorithm.</h1>
+  <p class="hero-sub">A 12-module live virtual program at the intersection of beauty, business, AI, and technology. Built for the next generation of beauty industry leaders.</p>
+  <div class="hero-actions">
+    <a href="https://buy.stripe.com/4gM9AM9F71z58A45dUco001" class="btn-primary">Enroll Now — $697</a>
+    <a href="#about" class="btn-secondary">Learn More</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">12</div><div class="stat-label">Modules</div></div>
+    <div><div class="stat-num">4</div><div class="stat-label">Curriculum Tracks</div></div>
+    <div><div class="stat-num">Jan 12</div><div class="stat-label">Winter Cohort Launch</div></div>
+    <div><div class="stat-num">25</div><div class="stat-label">Seats Available</div></div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section id="press">
+  <span class="press-label">As Seen In</span>
+  <div class="press-logos">
+    <span class="press-logo">Forbes</span>
+    <span class="press-logo">ESSENCE</span>
+    <span class="press-logo">Black Enterprise</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">About the Program</div>
+      <h2 class="section-headline">Beauty is a <em>serious</em> business frontier.</h2>
+      <p class="about-body">BeautyTech U™ is a next-generation workforce development and innovation program that uses the beauty industry as a lens to teach the most in-demand skills of the modern economy — <strong>AI, data, systems thinking, consumer intelligence, entrepreneurship, and cultural storytelling.</strong></p>
+      <p class="about-body">Designed for students and professionals across disciplines — business, computer science, communications, marketing, and entrepreneurship — BTU meets learners where their curiosity already lives.</p>
+      <p class="about-body">Presented by <strong>Ebony J. Karim</strong>, Founder & CEO of The Beauty Genie® — as seen in Forbes, ESSENCE, and Black Enterprise.</p>
+    </div>
+    <div class="reveal">
+      <div class="section-eyebrow">Four Curriculum Tracks</div>
+      <div class="tracks-grid">
+        <div class="track-card">
+          <div class="track-num">Track 01</div>
+          <div class="track-name">Business & Brand Strategy</div>
+          <div class="track-desc">Entrepreneurship, brand-building, funding, and innovation strategy.</div>
+        </div>
+        <div class="track-card">
+          <div class="track-num">Track 02</div>
+          <div class="track-name">Technology & Innovation</div>
+          <div class="track-desc">AI, machine learning, personalization, creator economy, and social commerce.</div>
+        </div>
+        <div class="track-card">
+          <div class="track-num">Track 03</div>
+          <div class="track-name">Cosmetic Chemistry</div>
+          <div class="track-desc">Formulation science, ingredient knowledge, and product development pipelines.</div>
+        </div>
+        <div class="track-card">
+          <div class="track-num">Track 04</div>
+          <div class="track-name">Beauty Retail & Consumer Experience</div>
+          <div class="track-desc">Retail operations, brand-to-shelf strategy, and multicultural consumer trends.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS -->
+<section id="sessions">
+  <div class="sessions-inner">
+    <div class="sessions-header reveal">
+      <div>
+        <div class="section-eyebrow">The Curriculum</div>
+        <h2 class="section-headline" style="color:var(--cream);">12 Modules.<br><em>One Industry.</em></h2>
+      </div>
+      <p class="sessions-intro">Six live Zoom sessions plus six async learning modules — one after each live session. Every module bridges theory and real-world application.</p>
+    </div>
+
+    <div class="sessions-grid">
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 01</div>
+        <div class="session-title">Beauty Intelligence in the Age of AI</div>
+        <div class="session-desc">AI-powered beauty discovery, machine learning, personalization, and consumer recommendation systems. Students interact with commercially deployed AI in real time.</div>
+        <div class="session-guest">Wayne Liu, President & CGO, Perfect Corp</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A1</div>
+        <div class="session-title">AI in the Wild</div>
+        <div class="session-desc">Students explore beauty brands actively deploying AI. Self-guided research + written reflection submitted before Session 02.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 02</div>
+        <div class="session-title">Building for the Culture</div>
+        <div class="session-desc">Entrepreneurship, brand-building, consumer behavior, and cultural storytelling. Systems-thinking behind scalable, culture-driven businesses.</div>
+        <div class="session-guest">Shay Bailey, Beauty Retail Leader & Entrepreneur</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A2</div>
+        <div class="session-title">Know Your Customer</div>
+        <div class="session-desc">Consumer research methods — social listening, surveys, community feedback loops. Applied directly to the student's capstone concept.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 03</div>
+        <div class="session-title">The Infrastructure Play</div>
+        <div class="session-desc">Retail operations, beauty ecosystems, experiential commerce, platform strategy, and retail analytics. Mapping scalable business systems.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A3</div>
+        <div class="session-title">Behind the Brand</div>
+        <div class="session-desc">Students audit a beauty brand end-to-end — digital presence, retail footprint, supply chain signals, customer experience, and technology layer.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 04</div>
+        <div class="session-title">Creator Economy + Beauty Commerce</div>
+        <div class="session-desc">Social commerce, creator-led brands, AI-driven product discovery, UGC strategy, and affiliate ecosystems. How creators shape modern beauty purchasing behavior.</div>
+        <div class="session-guest">Industry Speaker — Creator Economy (TBD)</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A4</div>
+        <div class="session-title">Find Your Market</div>
+        <div class="session-desc">Market research for the capstone concept — competitors, white space, pricing, and positioning. The backbone of the capstone draft.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 05</div>
+        <div class="session-title">Culture, Identity & Inclusive Innovation</div>
+        <div class="session-desc">Multicultural consumer insights, dataset bias, ethical AI, and beauty equity. The cultural and intellectual culmination of the instructional arc.</div>
+        <div class="session-guest">Industry Speaker — Inclusive Innovation (TBD)</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A5</div>
+        <div class="session-title">Formulate Your Thinking</div>
+        <div class="session-desc">Cosmetic chemistry pre-reading and label decode practice — so students arrive at Session 06 fluent in the fundamentals.</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type live">Live Session</span>
+        <div class="session-num">Session 06</div>
+        <div class="session-title">From Formula to Shelf</div>
+        <div class="session-desc">Cosmetic chemistry, formulation science, product development, and commercialization. Science-to-shelf fluency — accessible to all, rigorous enough to matter.</div>
+        <div class="session-guest">Tricelle Gray, Founder, Formulery™</div>
+      </div>
+      <div class="session-card reveal">
+        <span class="session-type async">Async Module</span>
+        <div class="session-num">Module A6</div>
+        <div class="session-title">Pitch Ready</div>
+        <div class="session-desc">The BTU Pitch Framework, presentation coaching, Q&A prep, and Pitch Rubric self-assessment. Walk into Pitch Day with a plan, not nerves.</div>
+      </div>
+    </div>
+
+    <!-- Capstone -->
+    <div class="capstone-box reveal">
+      <div class="capstone-inner">
+        <div class="capstone-left">
+          <div class="section-eyebrow">The Capstone</div>
+          <div class="capstone-title">The BTU Blueprint™</div>
+          <p class="capstone-desc">Every student completes a capstone project demonstrating their ability to apply learning across all four curriculum tracks — then presents live to an industry panel on Pitch Day. A score of 70/100 or above earns the BeautyTech U™ Certificate of Completion.</p>
+        </div>
+        <div class="capstone-right">
+          <div class="track-pill" style="border-left: 2px solid var(--magenta);">
+            <div class="track-pill-label" style="color: var(--magenta);">Track A — Open Brief</div>
+            <div class="track-pill-desc">Develop an original product or service concept. You define the problem, the consumer, and the solution — start to finish.</div>
+          </div>
+          <div class="track-pill" style="border-left: 2px solid var(--gold);">
+            <div class="track-pill-label" style="color: var(--gold);">Track B — Brand Challenge™</div>
+            <div class="track-pill-desc">A partner brand submits a real business problem. You solve it. Evaluated by brand executives — the same people who make hiring decisions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Enrollment</div>
+      <h2 class="section-headline">One price.<br><em>Everything included.</em></h2>
+      <p style="font-size:16px; color:var(--slate); line-height:1.75; font-weight:300; margin-top:12px;">Winter Cohort launches January 12, 2027. Seats are limited to 25 students.</p>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="pricing-glow"></div>
+      <div class="pricing-badge">Winter Cohort · January 12, 2027</div>
+      <div class="pricing-amount">$697</div>
+      <div class="pricing-period">One-time payment · Full program access</div>
+      <ul class="pricing-includes">
+        <li>6 live Zoom sessions with industry speakers</li>
+        <li>6 async learning modules</li>
+        <li>BTU Student Workbook</li>
+        <li>Session recordings + replays</li>
+        <li>The BTU Blueprint™ capstone project</li>
+        <li>Pitch Day — live industry panel</li>
+        <li>BeautyTech U™ Certificate of Completion</li>
+        <li>BTU Community Discord access</li>
+      </ul>
+      <div class="seats-bar"><div class="seats-fill"></div></div>
+      <div class="seats-text"><strong>Limited enrollment.</strong> 25 seats available for the Winter Cohort.</div>
+      <div style="margin-top:36px;">
+        <a href="https://buy.stripe.com/4gM9AM9F71z58A45dUco001" class="btn-primary" style="display:block; text-align:center; font-size:16px; padding:18px;">Secure Your Spot — $697 →</a>
+      </div>
+      <p class="pricing-note">Secure checkout via Stripe · Questions? <a href="mailto:info@thebeautygenie.co" style="color:var(--magenta); text-decoration:none;">info@thebeautygenie.co</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL -->
+<section id="enroll">
+  <div class="enroll-glow"></div>
+  <div class="enroll-inner reveal">
+    <div class="section-eyebrow" style="justify-content:center; margin-bottom:24px;">Ready?</div>
+    <h2 class="enroll-headline">Your seat is<br><em>waiting.</em></h2>
+    <p class="enroll-sub">Winter Cohort launches January 12, 2027. 25 seats. One program. Built for the next generation of beauty industry leaders.</p>
+    <a href="https://buy.stripe.com/4gM9AM9F71z58A45dUco001" class="btn-primary" style="font-size:16px; padding:18px 52px;">Enroll Now — $697 →</a>
+    <p class="enroll-detail">
+      Secure checkout via Stripe · The Beauty Genie LLC<br>
+      Questions? <a href="mailto:info@thebeautygenie.co">info@thebeautygenie.co</a> ·
+      Community: <a href="https://discord.gg/sBMv4z2j7">discord.gg/sBMv4z2j7</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">THE BEAUTY <span>GENIE®</span> · BEAUTYTECH <span>U™</span></div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#sessions">Curriculum</a>
+    <a href="#pricing">Pricing</a>
+    <a href="https://discord.gg/sBMv4z2j7">Discord</a>
+    <a href="mailto:info@thebeautygenie.co">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 The Beauty Genie LLC · BeautyTech U™</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
